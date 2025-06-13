@@ -14,6 +14,8 @@ navigationUIKTX = "2.5.3"
 roomRuntime = "2.5.1"
 roomKTX = "2.5.1"
 roomCompiler = "2.5.1"
+lifecycleViewmodelAndroid = "2.9.1"
+firebaseFirestoreKtx = "25.1.4"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -29,6 +31,8 @@ navigation-ui-ktx = { group ="androidx.navigation", name="navigation-ui-ktx", ve
 room-runtime = { group="androidx.room", name="room-runtime", version.ref="roomRuntime" }
 room-ktx = { group="androidx.room", name="room-ktx", version.ref="roomKTX" }
 room-compiler = { group = "androidx.room", name="room-compiler", version.ref = "roomCompiler" }
+androidx-lifecycle-viewmodel-android = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-android", version.ref = "lifecycleViewmodelAndroid" }
+firebase-firestore-ktx = { group = "com.google.firebase", name = "firebase-firestore-ktx", version.ref = "firebaseFirestoreKtx" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
