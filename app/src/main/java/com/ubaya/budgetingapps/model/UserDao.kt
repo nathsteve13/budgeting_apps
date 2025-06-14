@@ -16,4 +16,7 @@ interface UserDao {
 
     @Query("SELECT * FROM user WHERE username = :username LIMIT 1")
     fun getUserByUsername(username: String): User
+
+    @Query("UPDATE user SET password = :newPassword WHERE username = :username")
+    fun updatePassword(username: String, newPassword: String)
 }

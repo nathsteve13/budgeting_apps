@@ -3,7 +3,9 @@ package com.ubaya.budgetingapps.viewmodel
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import com.ubaya.budgetingapps.model.AppDatabase
 import com.ubaya.budgetingapps.model.User
+import com.ubaya.budgetingapps.model.UserDao
 import com.ubaya.budgetingapps.util.buildDb
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -39,6 +41,13 @@ class UserViewModel(application: Application) : AndroidViewModel(application), C
             val db = buildDb(getApplication())
             val user = db.userDao().login(username, password)
             loginResultLD.postValue(user)
+        }
+    }
+
+    fun updatePassword(username: String, newPassword: String){
+        launch {
+            val db = buildDb(getApplication())
+            db.userDao().updatePassword(username, newPassword)
         }
     }
 }
