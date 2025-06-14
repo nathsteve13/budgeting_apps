@@ -32,7 +32,7 @@ class AuthActivity : AppCompatActivity() {
         }
 
         navController = (supportFragmentManager.findFragmentById(R.id.authNavHostFragment) as NavHostFragment).navController
-        NavigationUI.setupActionBarWithNavController(this, navController)
+        //NavigationUI.setupActionBarWithNavController(this, navController)
     }
 
     override fun onSupportNavigateUp(): Boolean {
