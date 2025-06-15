@@ -6,7 +6,7 @@
     <data>
         <variable
             name="user"
-            type="com.ubaya.budgetingapps.model.User" />
+            type="com.ubaya.budgetingapps.model.user.User" />
     </data>
 
     <LinearLayout

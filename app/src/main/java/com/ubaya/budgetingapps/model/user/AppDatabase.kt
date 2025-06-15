@@ -1,11 +1,9 @@
-package com.ubaya.budgetingapps.model
+package com.ubaya.budgetingapps.model.user
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.ubaya.budgetingapps.model.User
-import com.ubaya.budgetingapps.model.UserDao
 import com.ubaya.budgetingapps.util.DB_NAME
 
 @Database(entities = [User::class], version = 1)

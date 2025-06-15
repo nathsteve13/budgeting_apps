@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_navigation"
+    app:startDestination="@id/expenseTrackerFragment">
+
+    <fragment
+        android:id="@+id/expenseTrackerFragment"
+        android:name="com.ubaya.budgetingapps.view.ExpenseTrackerFragment"
+        android:label="Expense"
+        tools:layout="@layout/fragment_expense_tracker" />
+
+    <fragment
+        android:id="@+id/budgetingFragment"
+        android:name="com.ubaya.budgetingapps.view.budgeting.BudgetingFragment"
+        android:label="Budget"
+        tools:layout="@layout/fragment_budgeting">
+        <action
+            android:id="@+id/actionBudgetingFragment_to_budgetEditFragment"
+            app:destination="@id/budgetEditFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/budgetEditFragment"
+        android:name="com.ubaya.budgetingapps.view.budgeting.BudgetEditFragment"
+        android:label="Edit Budget"
+        tools:layout="@layout/fragment_budget_edit">
+        <argument
+            android:name="uuid"
+            app:argType="integer"
+            android:defaultValue="-1" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/reportFragment"
+        android:name="com.ubaya.budgetingapps.view.ReportFragment"
+        android:label="Report"
+        tools:layout="@layout/fragment_report" />
+
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.ubaya.budgetingapps.view.profile.ProfileFragment"
+        android:label="Profile"
+        tools:layout="@layout/fragment_profile" />
+</navigation>

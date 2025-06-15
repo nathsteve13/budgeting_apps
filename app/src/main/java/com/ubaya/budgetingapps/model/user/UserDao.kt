@@ -1,4 +1,4 @@
-package com.ubaya.budgetingapps.model
+package com.ubaya.budgetingapps.model.user
 
 import androidx.room.Dao
 import androidx.room.Insert

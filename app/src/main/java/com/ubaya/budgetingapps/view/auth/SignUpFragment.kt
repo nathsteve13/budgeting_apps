@@ -10,7 +10,7 @@ import com.ubaya.budgetingapps.databinding.FragmentSignUpBinding
 import com.ubaya.budgetingapps.viewmodel.UserViewModel
 import android.widget.Toast
 import androidx.navigation.Navigation
-import com.ubaya.budgetingapps.model.User
+import com.ubaya.budgetingapps.model.user.User
 
 class SignUpFragment : Fragment() {
     private lateinit var binding: FragmentSignUpBinding

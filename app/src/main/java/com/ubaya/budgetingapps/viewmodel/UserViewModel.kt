@@ -3,9 +3,7 @@ package com.ubaya.budgetingapps.viewmodel
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import com.ubaya.budgetingapps.model.AppDatabase
-import com.ubaya.budgetingapps.model.User
-import com.ubaya.budgetingapps.model.UserDao
+import com.ubaya.budgetingapps.model.user.User
 import com.ubaya.budgetingapps.util.buildDb
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

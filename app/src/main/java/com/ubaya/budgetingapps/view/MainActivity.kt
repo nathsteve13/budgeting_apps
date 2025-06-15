@@ -1,11 +1,10 @@
 package com.ubaya.budgetingapps.view
-
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.ubaya.budgetingapps.R
-import com.ubaya.budgetingapps.view.budgeting.BudgetingFragment
-import com.ubaya.budgetingapps.view.profile.ProfileFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -13,27 +12,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.fragment_container_view) as NavHostFragment
+        val navController = navHostFragment.navController
 
-        // Default fragment saat dibuka
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.fragment_container_view, ExpenseTrackerFragment())
-            .commit()
+        val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_navigation)
+        bottomNav.setupWithNavController(navController)
 
-        bottomNavigationView.setOnItemSelectedListener { item ->
-            val fragment = when (item.itemId) {
-                R.id.nav_expense_tracker -> ExpenseTrackerFragment()
-                R.id.nav_budgeting -> BudgetingFragment()
-                R.id.nav_report -> ReportFragment()
-                R.id.nav_profile -> ProfileFragment()
-                else -> null
-            }
-            fragment?.let {
-                supportFragmentManager.beginTransaction()
-                    .replace(R.id.fragment_container_view, it)
-                    .commit()
-                true
-            } ?: false
-        }
     }
 }

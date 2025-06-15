@@ -2,7 +2,7 @@ package com.ubaya.budgetingapps.util
 
 import android.content.Context
 import androidx.room.Room
-import com.ubaya.budgetingapps.model.AppDatabase
+import com.ubaya.budgetingapps.model.user.AppDatabase
 
 val DB_NAME = "expensetracker.db"
 

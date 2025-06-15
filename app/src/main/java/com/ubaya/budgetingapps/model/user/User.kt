@@ -1,4 +1,4 @@
-package com.ubaya.budgetingapps.model
+package com.ubaya.budgetingapps.model.user
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

@@ -2,7 +2,7 @@ package com.ubaya.budgetingapps.util
 
 import android.content.Context
 import android.content.SharedPreferences
-import com.ubaya.budgetingapps.model.User
+import com.ubaya.budgetingapps.model.user.User
 
 class SessionManager(context: Context) {
 
