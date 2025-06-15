@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/signInFragment"
-        android:name="com.ubaya.budgetingapps.view.SignInFragment"
+        android:name="com.ubaya.budgetingapps.view.auth.SignInFragment"
         android:label="Sign In"
         tools:layout="@layout/fragment_sign_in">
         <action
@@ -17,7 +17,7 @@
 
     <fragment
         android:id="@+id/signUpFragment"
-        android:name="com.ubaya.budgetingapps.view.SignUpFragment"
+        android:name="com.ubaya.budgetingapps.view.auth.SignUpFragment"
         android:label="Sign Up"
         tools:layout="@layout/fragment_sign_up">
         <action

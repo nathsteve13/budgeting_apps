@@ -1,18 +1,14 @@
-package com.ubaya.budgetingapps.view
+package com.ubaya.budgetingapps.view.auth
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.NavigationUI
-import com.ubaya.budgetingapps.MainActivity
 import com.ubaya.budgetingapps.R
 import com.ubaya.budgetingapps.databinding.ActivityAuthBinding
 import com.ubaya.budgetingapps.util.SessionManager
+import com.ubaya.budgetingapps.view.MainActivity
 
 
 class AuthActivity : AppCompatActivity() {

@@ -1,4 +1,4 @@
-package com.ubaya.budgetingapps
+package com.ubaya.budgetingapps.view.profile
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,11 +9,10 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.ubaya.budgetingapps.R
 import com.ubaya.budgetingapps.databinding.FragmentProfileBinding
-import com.ubaya.budgetingapps.databinding.FragmentSignInBinding
 import com.ubaya.budgetingapps.util.SessionManager
-import com.ubaya.budgetingapps.view.AuthActivity
-import com.ubaya.budgetingapps.view.SignInFragment
+import com.ubaya.budgetingapps.view.auth.AuthActivity
 import com.ubaya.budgetingapps.viewmodel.UserViewModel
 
 class ProfileFragment : Fragment(R.layout.fragment_profile) {
@@ -66,7 +65,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
         binding.btnSignOut.setOnClickListener {
             sessionManager.clearSession()
-            val intent = Intent(requireContext(),AuthActivity::class.java)
+            val intent = Intent(requireContext(), AuthActivity::class.java)
             startActivity(intent)
             requireActivity().finish()
         }

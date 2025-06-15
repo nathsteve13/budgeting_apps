@@ -1,4 +1,4 @@
-package com.ubaya.budgetingapps.view
+package com.ubaya.budgetingapps.view.auth
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
-import com.ubaya.budgetingapps.R
 import com.ubaya.budgetingapps.databinding.FragmentSignUpBinding
 import com.ubaya.budgetingapps.viewmodel.UserViewModel
 import android.widget.Toast

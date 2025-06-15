@@ -1,4 +1,4 @@
-package com.ubaya.budgetingapps.view
+package com.ubaya.budgetingapps.view.auth
 
 import android.content.Intent
 import android.os.Bundle
@@ -10,10 +10,9 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
-import com.ubaya.budgetingapps.MainActivity
-import com.ubaya.budgetingapps.R
 import com.ubaya.budgetingapps.databinding.FragmentSignInBinding
 import com.ubaya.budgetingapps.util.SessionManager
+import com.ubaya.budgetingapps.view.MainActivity
 import com.ubaya.budgetingapps.viewmodel.UserViewModel
 
 class SignInFragment : Fragment() {

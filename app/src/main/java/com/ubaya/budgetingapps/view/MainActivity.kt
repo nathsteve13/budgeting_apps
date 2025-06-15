@@ -1,11 +1,11 @@
-package com.ubaya.budgetingapps
+package com.ubaya.budgetingapps.view
 
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.ubaya.budgetingapps.R
+import com.ubaya.budgetingapps.view.budgeting.BudgetingFragment
+import com.ubaya.budgetingapps.view.profile.ProfileFragment
 
 class MainActivity : AppCompatActivity() {
 
