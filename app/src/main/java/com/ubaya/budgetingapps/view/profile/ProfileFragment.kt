@@ -9,60 +9,68 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.ubaya.budgetingapps.R
 import com.ubaya.budgetingapps.databinding.FragmentProfileBinding
 import com.ubaya.budgetingapps.util.SessionManager
 import com.ubaya.budgetingapps.view.auth.AuthActivity
 import com.ubaya.budgetingapps.viewmodel.UserViewModel
 
-class ProfileFragment : Fragment(R.layout.fragment_profile) {
+class ProfileFragment : Fragment() {
     private lateinit var binding: FragmentProfileBinding
     private lateinit var sessionManager: SessionManager
     private lateinit var viewModel: UserViewModel
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         binding = FragmentProfileBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         sessionManager = SessionManager(requireContext())
         viewModel = ViewModelProvider(this).get(UserViewModel::class.java)
+
+        // Ambil username & password dari session dan lakukan login
+        val username = sessionManager.getUsername()
+        val password = sessionManager.getPassword()
+
+        if (username != null && password != null) {
+            viewModel.login(username, password)
+        } else {
+            Toast.makeText(context, "User session not found", Toast.LENGTH_SHORT).show()
+        }
+
+        // Observe user object dan ikat ke layout
         viewModel.loginResultLD.observe(viewLifecycleOwner) { user ->
             binding.user = user
         }
 
+        // Tombol ganti password
         binding.btnChangePass.setOnClickListener {
-            val current = sessionManager.getPassword()
-
             val oldPassword = binding.txtOldPass.text.toString()
             val newPassword = binding.txtNewPass.text.toString()
             val repeatPassword = binding.txtRepeat.text.toString()
+            val current = sessionManager.getPassword()
 
-            sessionManager.getUsername()?.let { username ->
-                viewModel.updatePassword(username, newPassword)
-            } ?: run {
-                Toast.makeText(context, "Username not found in session", Toast.LENGTH_SHORT).show()
-            }
-
-            val allPrefs = sessionManager.getAllPrefs()
-            Log.d("DebugTag", "Semua isi prefs: $allPrefs")
-
-            if(oldPassword != current) {
+            if (oldPassword != current) {
                 Toast.makeText(context, "Wrong old password", Toast.LENGTH_SHORT).show()
-            }
-            else if (newPassword != repeatPassword) {
-                Toast.makeText(context, "New Password and Repeat Password must be same", Toast.LENGTH_SHORT).show()
-            }
-            else {
-                sessionManager.savePassBaru(newPassword)
-
-                Toast.makeText(context, "Password changed", Toast.LENGTH_SHORT).show()
-                Log.d("DEBUG", "Password baru berhasil disimpan: $newPassword")
+            } else if (newPassword != repeatPassword) {
+                Toast.makeText(context, "New Password and Repeat Password must match", Toast.LENGTH_SHORT).show()
+            } else {
+                username?.let {
+                    viewModel.updatePassword(it, newPassword)
+                    sessionManager.savePassBaru(newPassword)
+                    Toast.makeText(context, "Password changed", Toast.LENGTH_SHORT).show()
+                    Log.d("DEBUG", "Password updated to: $newPassword")
+                }
             }
         }
 
+        // Tombol Sign Out
         binding.btnSignOut.setOnClickListener {
             sessionManager.clearSession()
             val intent = Intent(requireContext(), AuthActivity::class.java)
