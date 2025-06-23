@@ -23,5 +23,9 @@ import androidx.room.RoomDatabase
             operator fun invoke(context: Context) = instance ?: synchronized(LOCK) {
                 instance ?: buildDatabase(context).also { instance = it }
             }
+
+            fun getInstance(context: Context): ExpenseDatabase {
+                return invoke(context)
+            }
         }
     }
