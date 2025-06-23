@@ -1,15 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center">
+    android:orientation="vertical"
+    android:padding="16dp">
 
+    <!-- Total Budget -->
     <TextView
-        android:id="@+id/textView"
-        android:text="Report"
-        android:textSize="24sp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:id="@+id/tvTotalBudget"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Total Budget: IDR 0"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:paddingBottom="4dp" />
+
+    <!-- Total Expense -->
+    <TextView
+        android:id="@+id/tvTotalExpense"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Total Expense: IDR 0"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:paddingBottom="12dp" />
+
+    <!-- Remaining Budget -->
+    <TextView
+        android:id="@+id/tvRemainingBudget"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Remaining Budget: IDR 0"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:paddingBottom="12dp" />
+
+    <!-- RecyclerView untuk daftar report budget -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recViewReport"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
 
 </LinearLayout>

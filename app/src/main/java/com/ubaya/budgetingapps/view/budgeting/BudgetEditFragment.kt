@@ -36,7 +36,7 @@ class BudgetEditFragment : Fragment(), BudgetEditListener {
         if (uuid == -1) {
             binding.txtJudul.text = "Tambah Budget"
             binding.btnSave.text = "Tambah"
-            binding.budget = Budget(name = "", amount = "")
+            binding.budget = Budget(name = "", amount = "", used = "")
         } else {
             binding.txtJudul.text = "Edit Budget"
             binding.btnSave.text = "Simpan Perubahan"

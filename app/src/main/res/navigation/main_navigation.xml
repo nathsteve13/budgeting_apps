@@ -34,7 +34,7 @@
 
     <fragment
         android:id="@+id/reportFragment"
-        android:name="com.ubaya.budgetingapps.view.ReportFragment"
+        android:name="com.ubaya.budgetingapps.view.report.ReportFragment"
         android:label="Report"
         tools:layout="@layout/fragment_report" />
 

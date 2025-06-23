@@ -7,6 +7,7 @@ import androidx.room.PrimaryKey
 data class Budget(
     var name: String,
     var amount: String,
+    var used: String,
     @PrimaryKey(autoGenerate = true)
     var uuid: Int = 0
 )
