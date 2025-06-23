@@ -7,9 +7,13 @@
 
     <fragment
         android:id="@+id/expenseTrackerFragment"
-        android:name="com.ubaya.budgetingapps.view.ExpenseTrackerFragment"
+        android:name="com.ubaya.budgetingapps.view.expense.ExpenseTrackerFragment"
         android:label="Expense"
-        tools:layout="@layout/fragment_expense_tracker" />
+        tools:layout="@layout/fragment_expense_tracker" >
+        <action
+            android:id="@+id/expenseTrackerFragment_to_newExpenseFragment"
+            app:destination="@id/newExpenseFragment3" />
+    </fragment>
 
     <fragment
         android:id="@+id/budgetingFragment"
@@ -43,4 +47,14 @@
         android:name="com.ubaya.budgetingapps.view.profile.ProfileFragment"
         android:label="Profile"
         tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/newExpenseFragment3"
+        android:name="com.ubaya.budgetingapps.view.expense.NewExpenseFragment"
+        android:label="NewExpenseFragment"
+        tools:layout="@layout/fragment_new_expense">
+        <argument
+            android:name="uuid"
+            app:argType="integer" />
+    </fragment>
+
 </navigation>

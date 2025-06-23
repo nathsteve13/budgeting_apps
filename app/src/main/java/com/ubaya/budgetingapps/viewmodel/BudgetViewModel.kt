@@ -5,6 +5,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.ubaya.budgetingapps.model.budget.Budget
 import com.ubaya.budgetingapps.model.budget.BudgetDatabase
+import com.ubaya.budgetingapps.model.expense.Expense
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -14,6 +15,7 @@ import kotlin.coroutines.CoroutineContext
 class BudgetViewModel(application: Application) : AndroidViewModel(application), CoroutineScope {
     val budgetLD = MutableLiveData<List<Budget>>()
     val budgetSingleLD = MutableLiveData<Budget>()
+    val expenseLD = MutableLiveData<List<Expense>>()
 
     private var job = Job()
     override val coroutineContext: CoroutineContext
@@ -48,4 +50,6 @@ class BudgetViewModel(application: Application) : AndroidViewModel(application),
             refresh()
         }
     }
+
+    
 }

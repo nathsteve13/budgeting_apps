@@ -58,7 +58,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Old Password"
-                    android:inputType="textVisiblePassword" />
+                    android:inputType="textPassword" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -76,7 +76,8 @@
                     android:id="@+id/txtNewPass"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="New Password" />
+                    android:hint="New Password"
+                    android:inputType="textPassword"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -94,7 +95,8 @@
                     android:id="@+id/txtRepeat"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Repeat Password" />
+                    android:hint="Repeat Password"
+                    android:inputType="textPassword"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <Button
