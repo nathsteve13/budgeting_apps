@@ -7,22 +7,22 @@ import androidx.room.RoomDatabase
 import com.ubaya.budgetingapps.util.DB_NAME
 
 @Database(entities = [User::class], version = 1)
-abstract class AppDatabase : RoomDatabase() {
+abstract class UserDatabase : RoomDatabase() {
 
     abstract fun userDao(): UserDao
 
     companion object {
-        @Volatile private var instance: AppDatabase? = null
+        @Volatile private var instance: UserDatabase? = null
         private val LOCK = Any()
 
         private fun buildDatabase(context: Context) = Room.databaseBuilder(
             context.applicationContext,
-            AppDatabase::class.java, DB_NAME
+            UserDatabase::class.java, DB_NAME
         )
             .fallbackToDestructiveMigration()
             .build()
 
-        operator fun invoke(context: Context): AppDatabase {
+        operator fun invoke(context: Context): UserDatabase {
             return instance ?: synchronized(LOCK) {
                 instance ?: buildDatabase(context).also {
                     instance = it

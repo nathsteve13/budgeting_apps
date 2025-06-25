@@ -2,7 +2,7 @@ package com.ubaya.budgetingapps.util
 
 import android.content.Context
 import androidx.room.Room
-import com.ubaya.budgetingapps.model.user.AppDatabase
+import com.ubaya.budgetingapps.model.user.UserDatabase
 
 val DB_NAME = "expensetracker.db"
 
@@ -13,10 +13,10 @@ val DB_NAME = "expensetracker.db"
 //     }
 // }
 
-fun buildDb(context: Context): AppDatabase {
+fun buildDb(context: Context): UserDatabase {
     val db = Room.databaseBuilder(
         context,
-        AppDatabase::class.java, DB_NAME
+        UserDatabase::class.java, DB_NAME
     )
         //.addMigrations(MIGRATION_1_2) // nanti kalau ada migration tinggal aktifkan
         .fallbackToDestructiveMigration() // sementara pakai destructive migration dulu
