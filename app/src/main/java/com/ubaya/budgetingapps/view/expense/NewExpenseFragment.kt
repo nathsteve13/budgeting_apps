@@ -68,31 +68,35 @@ class NewExpenseFragment : Fragment() {
 
         binding.btnAddExpense.setOnClickListener {
             val selectedPosition = binding.spinner.selectedItemPosition
+
+            if (selectedPosition == AdapterView.INVALID_POSITION || budgetList.isEmpty()) {
+                Toast.makeText(requireContext(), "Please select a budget", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
             val selectedBudget = budgetList[selectedPosition]
             val amountText = binding.txtNominal.text.toString()
             val descriptionText = binding.txtNotes.text.toString()
+            val amount = amountText.toIntOrNull()
 
-            val amount = amountText?.toIntOrNull()
-
-            if(amountText.isNotBlank() && descriptionText.isNotBlank() && amount != null && amount >=0) {
+            if (amountText.isNotBlank() && descriptionText.isNotBlank() && amount != null && amount >= 0) {
                 val newExpense = Expense(
-                    date = currentTimestamp,
+                    date = System.currentTimeMillis(),
                     amount = amount,
                     description = descriptionText,
                     budgetId = selectedBudget.uuid,
-                    budgetName = selectedBudget.name)
+                    budgetName = selectedBudget.name
+                )
 
                 expenseViewModel.insert(newExpense)
 
                 Toast.makeText(requireContext(), "Expense added", Toast.LENGTH_SHORT).show()
-
                 findNavController().popBackStack()
+            } else {
+                Toast.makeText(requireContext(), "Please enter a valid amount and description", Toast.LENGTH_SHORT).show()
             }
-            else {
-                Toast.makeText(requireContext(), "Please enter the valid amount and description", Toast.LENGTH_SHORT).show()
-            }
-
         }
+
 
     }
 
