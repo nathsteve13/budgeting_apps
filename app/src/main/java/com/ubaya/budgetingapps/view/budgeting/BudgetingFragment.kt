@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ubaya.budgetingapps.databinding.FragmentBudgetingBinding
 import com.ubaya.budgetingapps.viewmodel.BudgetViewModel
@@ -38,7 +39,7 @@ class BudgetingFragment : Fragment() {
 
         binding.btnAdd.setOnClickListener {
             val action = BudgetingFragmentDirections.actionBudgetingFragmentToBudgetEditFragment(-1)
-            Navigation.findNavController(it).navigate(action)
+            findNavController().navigate(action)
         }
 
         observeViewModel()

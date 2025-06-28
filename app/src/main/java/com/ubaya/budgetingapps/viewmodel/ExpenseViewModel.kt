@@ -26,7 +26,7 @@ class ExpenseViewModel(application: Application) : AndroidViewModel(application)
     fun refresh() {
         launch {
             val db = ExpenseDatabase(getApplication())
-            expenseLD.postValue(db.expenseDao().getAllExpensesNow())
+            expenseLD.postValue(db.expenseDao().getAllExpenses())
         }
     }
 

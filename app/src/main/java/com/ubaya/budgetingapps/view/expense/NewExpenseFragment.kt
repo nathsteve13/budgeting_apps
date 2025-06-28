@@ -70,7 +70,8 @@ class NewExpenseFragment : Fragment() {
             val selectedPosition = binding.spinner.selectedItemPosition
 
             if (selectedPosition == AdapterView.INVALID_POSITION || budgetList.isEmpty()) {
-                Toast.makeText(requireContext(), "Please select a budget", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Please select a budget", Toast.LENGTH_SHORT)
+                    .show()
                 return@setOnClickListener
             }
 
@@ -78,8 +79,30 @@ class NewExpenseFragment : Fragment() {
             val amountText = binding.txtNominal.text.toString()
             val descriptionText = binding.txtNotes.text.toString()
             val amount = amountText.toIntOrNull()
+            val budgetAmount = selectedBudget.amount.toIntOrNull() ?: 0
 
-            if (amountText.isNotBlank() && descriptionText.isNotBlank() && amount != null && amount >= 0) {
+            if (amountText.isBlank() || descriptionText.isBlank()) {
+                Toast.makeText(
+                    requireContext(),
+                    "Please enter amount and description",
+                    Toast.LENGTH_SHORT
+                ).show()
+            } else if (amount == null) {
+                Toast.makeText(
+                    requireContext(),
+                    "Please enter a valid numeric amount",
+                    Toast.LENGTH_SHORT
+                ).show()
+            } else if (amount < 0) {
+                Toast.makeText(requireContext(), "Amount cannot be negative", Toast.LENGTH_SHORT)
+                    .show()
+            } else if (amount > budgetAmount) {
+                Toast.makeText(
+                    requireContext(),
+                    "Amount cannot exceed budget amount",
+                    Toast.LENGTH_SHORT
+                ).show()
+            } else {
                 val newExpense = Expense(
                     date = System.currentTimeMillis(),
                     amount = amount,
@@ -92,12 +115,9 @@ class NewExpenseFragment : Fragment() {
 
                 Toast.makeText(requireContext(), "Expense added", Toast.LENGTH_SHORT).show()
                 findNavController().popBackStack()
-            } else {
-                Toast.makeText(requireContext(), "Please enter a valid amount and description", Toast.LENGTH_SHORT).show()
             }
+
         }
-
-
     }
 
     private fun observeViewModel() {
@@ -140,6 +160,7 @@ class NewExpenseFragment : Fragment() {
                 override fun onNothingSelected(parent: AdapterView<*>) {}
             }
         }
+
     }
 
     private fun updateProgressBar(budget: Budget) {

@@ -14,7 +14,7 @@ import com.ubaya.budgetingapps.databinding.FragmentBudgetEditBinding
 import com.ubaya.budgetingapps.model.budget.Budget
 import com.ubaya.budgetingapps.viewmodel.BudgetViewModel
 
-class BudgetEditFragment : Fragment(), BudgetEditListener {
+class BudgetEditFragment : Fragment() {
     private lateinit var binding: FragmentBudgetEditBinding
     private lateinit var viewModel: BudgetViewModel
     private var uuid = -1
@@ -28,7 +28,6 @@ class BudgetEditFragment : Fragment(), BudgetEditListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         viewModel = ViewModelProvider(this).get(BudgetViewModel::class.java)
-        binding.listener = this
 
         uuid = BudgetEditFragmentArgs.fromBundle(requireArguments()).uuid
         Log.d("BudgetEditFragment", "UUID received: $uuid")
@@ -36,46 +35,47 @@ class BudgetEditFragment : Fragment(), BudgetEditListener {
         if (uuid == -1) {
             binding.txtJudul.text = "Tambah Budget"
             binding.btnSave.text = "Tambah"
-            binding.budget = Budget(name = "", amount = "", used = "")
         } else {
             binding.txtJudul.text = "Edit Budget"
             binding.btnSave.text = "Simpan Perubahan"
             viewModel.load(uuid)
             observeViewModel()
         }
+        binding.btnSave.setOnClickListener {
+            val name = binding.txtName.text.toString()
+            val amount = binding.txtAmount.text.toString()
+
+            if (name.isBlank()) {
+                Toast.makeText(context, "Nama tidak boleh kosong", Toast.LENGTH_SHORT).show()
+            } else if (amount.isBlank() || amount.toIntOrNull() == null || amount.toInt() <= 0) {
+                Toast.makeText(context, "Nominal harus >= 0", Toast.LENGTH_SHORT).show()
+            } else {
+                val budget = Budget(name = name, amount = amount, used = "")
+
+                if (uuid == -1) {
+                    viewModel.insert(budget)
+                    Toast.makeText(context, "Budget ditambahkan", Toast.LENGTH_SHORT).show()
+                } else {
+                    budget.uuid = uuid
+                    viewModel.update(budget)
+                    Toast.makeText(context, "Budget diperbarui", Toast.LENGTH_SHORT).show()
+                }
+                Navigation.findNavController(it).popBackStack()
+            }
+        }
     }
 
 
     private fun observeViewModel() {
-        viewModel.budgetSingleLD.observe(viewLifecycleOwner, Observer {
-            if (it != null) {
-                binding.budget = it
+        viewModel.budgetSingleLD.observe(viewLifecycleOwner, Observer { budget ->
+            if (budget != null) {
+                binding.txtName.setText(budget.name)
+                binding.txtAmount.setText(budget.amount)
             } else {
                 Toast.makeText(requireContext(), "Budget tidak ditemukan", Toast.LENGTH_SHORT).show()
                 Navigation.findNavController(requireView()).popBackStack()
             }
         })
     }
-
-
-    override fun onClick(v: View) {
-        val budget = binding.budget
-        if (budget != null) {
-            if (budget.name.isBlank()) {
-                Toast.makeText(context, "Nama tidak boleh kosong", Toast.LENGTH_SHORT).show()
-            } else if (budget.amount.isBlank() || budget.amount.toIntOrNull() == null || budget.amount.toInt() <= 0) {
-                Toast.makeText(context, "Nominal harus >= 0", Toast.LENGTH_SHORT).show()
-            } else {
-                if (uuid == -1) {
-                    viewModel.insert(budget)
-                    Toast.makeText(context, "Budget ditambahkan", Toast.LENGTH_SHORT).show()
-                } else {
-                    viewModel.update(budget)
-                    Toast.makeText(context, "Budget diperbarui", Toast.LENGTH_SHORT).show()
-                }
-                Navigation.findNavController(v).popBackStack()
-            }
-        }
-    }
-
 }
+
