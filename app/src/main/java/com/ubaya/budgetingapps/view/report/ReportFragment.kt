@@ -33,6 +33,7 @@ class ReportFragment : Fragment() {
         // Observasi perubahan data
         viewModel.budgetLD.observe(viewLifecycleOwner) { budgets ->
             viewModel.expenseLD.observe(viewLifecycleOwner) { expenses ->
+
                 reportAdapter = ReportAdapter(ArrayList(budgets), expenses)
                 binding.recViewReport.adapter = reportAdapter
 
@@ -41,9 +42,9 @@ class ReportFragment : Fragment() {
                 val remaining = totalBudget - totalUsed
 
                 val formatter = NumberFormat.getNumberInstance(Locale("id", "ID"))
-                binding.tvTotalBudget.text = "Total Budget: IDR ${formatter.format(totalBudget)}"
-                binding.tvTotalExpense.text = "Total Expense: IDR ${formatter.format(totalUsed)}"
-                binding.tvRemainingBudget.text = "Remaining Budget: IDR ${formatter.format(remaining)}"
+
+                binding.tvNumber.text = " IDR ${formatter.format(totalUsed)} / IDR ${formatter.format(totalBudget)}"
+                //binding.tvRemainingBudget.text = "Remaining Budget: IDR ${formatter.format(remaining)}"
             }
         }
     }
