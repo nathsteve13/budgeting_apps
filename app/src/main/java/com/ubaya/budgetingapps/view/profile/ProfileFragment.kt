@@ -14,7 +14,7 @@ import com.ubaya.budgetingapps.util.SessionManager
 import com.ubaya.budgetingapps.view.auth.AuthActivity
 import com.ubaya.budgetingapps.viewmodel.UserViewModel
 
-class ProfileFragment : Fragment() {
+class ProfileFragment : Fragment(), ProfileListener {
     private lateinit var binding: FragmentProfileBinding
     private lateinit var sessionManager: SessionManager
     private lateinit var viewModel: UserViewModel
@@ -25,6 +25,7 @@ class ProfileFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentProfileBinding.inflate(inflater, container, false)
+        binding.listener = this
         return binding.root
     }
 
@@ -48,34 +49,33 @@ class ProfileFragment : Fragment() {
         viewModel.loginResultLD.observe(viewLifecycleOwner) { user ->
             binding.user = user
         }
+    }
 
-        // Tombol ganti password
-        binding.btnChangePass.setOnClickListener {
-            val oldPassword = binding.txtOldPass.text.toString()
-            val newPassword = binding.txtNewPass.text.toString()
-            val repeatPassword = binding.txtRepeat.text.toString()
-            val current = sessionManager.getPassword()
+    override fun onChangepasswordClick(v: View) {
+        val oldPassword = binding.txtOldPass.text.toString()
+        val newPassword = binding.txtNewPass.text.toString()
+        val repeatPassword = binding.txtRepeat.text.toString()
+        val current = sessionManager.getPassword()
+        val username = sessionManager.getUsername()
 
-            if (oldPassword != current) {
-                Toast.makeText(context, "Wrong old password", Toast.LENGTH_SHORT).show()
-            } else if (newPassword != repeatPassword) {
-                Toast.makeText(context, "New Password and Repeat Password must match", Toast.LENGTH_SHORT).show()
-            } else {
-                username?.let {
-                    viewModel.updatePassword(it, newPassword)
-                    sessionManager.savePassBaru(newPassword)
-                    Toast.makeText(context, "Password changed", Toast.LENGTH_SHORT).show()
-                    Log.d("DEBUG", "Password updated to: $newPassword")
-                }
+        if (oldPassword != current) {
+            Toast.makeText(context, "Wrong old password", Toast.LENGTH_SHORT).show()
+        } else if (newPassword != repeatPassword) {
+            Toast.makeText(context, "New Password and Repeat Password must match", Toast.LENGTH_SHORT).show()
+        } else {
+            username?.let {
+                viewModel.updatePassword(it, newPassword)
+                sessionManager.savePassBaru(newPassword)
+                Toast.makeText(context, "Password changed", Toast.LENGTH_SHORT).show()
+                Log.d("DEBUG", "Password updated to: $newPassword")
             }
         }
-
-        // Tombol Sign Out
-        binding.btnSignOut.setOnClickListener {
-            sessionManager.clearSession()
-            val intent = Intent(requireContext(), AuthActivity::class.java)
-            startActivity(intent)
-            requireActivity().finish()
-        }
     }
+    override fun onLogoutClick(v: View) {
+        sessionManager.clearSession()
+        val intent = Intent(requireContext(), AuthActivity::class.java)
+        startActivity(intent)
+        requireActivity().finish()
+    }
+
 }

@@ -7,6 +7,9 @@
         <variable
             name="user"
             type="com.ubaya.budgetingapps.model.user.User" />
+        <variable
+            name="listener"
+            type="com.ubaya.budgetingapps.view.profile.ProfileListener" />
     </data>
 
     <LinearLayout
@@ -106,6 +109,7 @@
                 android:layout_marginTop="40dp"
                 android:layout_marginEnd="40dp"
                 android:text="CHANGE PASSWORD"
+                android:onClick="@{(v) -> listener.onChangepasswordClick(v)}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textInputRepeat" />
 
@@ -117,6 +121,7 @@
                 android:layout_marginStart="40dp"
                 android:layout_marginTop="40dp"
                 android:text="SIGN OUT"
+                android:onClick="@{(v) -> listener.onLogoutClick(v)}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textInputRepeat" />
         </androidx.constraintlayout.widget.ConstraintLayout>
