@@ -30,7 +30,7 @@ class ExpenseAdapter (
                 txtExpenseAmount.text = "IDR ${formatCurrency(expense.amount)}"
                 chipExpenseBudget.text = expense.budgetName
 
-                root.setOnClickListener {
+                txtExpenseAmount.setOnClickListener {
                     onClick(expense)
                 }
             }
